@@ -1,0 +1,247 @@
+# Движок правил Shadow PKI Report — базовый набор.
+#
+# Черновик этапа 0. Формулировки вычитывает и утверждает продакт: по плану
+# это самая дешёвая часть, которая сильнее всего влияет на то, как отчёт
+# читается заказчиком.
+#
+# Правила применяются к ЛИНИЯМ сертификатов (см. требования, п. 2.2),
+# а не к отдельным записям CT.
+#
+# Тон: констатирующий. Обвинительных конструкций («в обход ИТ»,
+# «нарушение», «халатность») в текстах нет — отчёт излагает факт,
+# выводы делает читатель.
+#
+# Плейсхолдеры в текстах: {name}, {names}, {count}, {issuer}, {issuers},
+# {days}, {key_size}, {sig_alg}, {expired_at}, {rhythm}.
+
+version: 1
+
+severity_levels: [critical, high, medium, low, info]
+
+findings:
+
+  - id: name_resolves_cert_expired
+    applies_to: line
+    severity: critical
+    condition:
+      all:
+        - current_expired: true
+        - any_name_resolves: true
+    title: "Имя резолвится, актуальный сертификат истёк"
+    finding: >-
+      Имя {name} продолжает резолвиться в публичном DNS, при этом последний
+      выпущенный на него сертификат истёк {expired_at} и с тех пор не
+      перевыпускался.
+    recommendation: >-
+      Определить владельца ресурса и решить: перевыпустить сертификат либо
+      снять DNS-запись, если ресурс выведен из эксплуатации.
+    note_for_meeting: >-
+      Самая сильная находка. По реестрам не видно, работает ли сервис, —
+      формулировка намеренно говорит только о резолвинге и о выпуске.
+
+  - id: line_expired_not_reissued
+    applies_to: line
+    severity: high
+    condition:
+      all:
+        - current_expired: true
+        - any_name_resolves: false
+    title: "Сертификат истёк и не был перевыпущен"
+    finding: >-
+      Последний сертификат на {names} истёк {expired_at}. Более новых
+      выпусков на этот набор имён в публичных логах нет.
+    recommendation: >-
+      Проверить, нужен ли ресурс. Если нужен — перевыпустить и поставить
+      на учёт; если нет — убедиться, что записи о нём удалены.
+
+  - id: expiring_7d
+    applies_to: line
+    severity: critical
+    condition:
+      all:
+        - current_expired: false
+        - days_to_expiry_lte: 7
+    title: "Истекает менее чем через 7 дней"
+    finding: >-
+      Сертификат на {names} истекает через {days} дн. Выпуска на замену в
+      публичных логах пока нет.
+    recommendation: >-
+      Перевыпустить сейчас. При ручном процессе продления такой запас уже
+      не оставляет места на согласование.
+
+  - id: expiring_30d
+    applies_to: line
+    severity: medium
+    condition:
+      all:
+        - current_expired: false
+        - days_to_expiry_lte: 30
+        - days_to_expiry_gt: 7
+    title: "Истекает менее чем через 30 дней"
+    finding: >-
+      Сертификат на {names} истекает через {days} дн.
+    recommendation: >-
+      Включить в ближайший цикл продления.
+
+  - id: rsa_key_short
+    applies_to: line
+    severity: high
+    condition:
+      all:
+        - key_alg: RSA
+        - key_size_lt: 2048
+    title: "Длина ключа RSA менее 2048 бит"
+    finding: >-
+      Актуальный сертификат на {names} использует ключ RSA длиной
+      {key_size} бит.
+    recommendation: >-
+      Перевыпустить с ключом не менее 2048 бит, предпочтительно 3072 или
+      ECDSA P-256. Одновременно проверить, где хранится приватный ключ.
+
+  - id: weak_signature
+    applies_to: line
+    severity: high
+    condition:
+      sig_alg_in: [sha1WithRSAEncryption, md5WithRSAEncryption, sha1WithECDSA]
+    title: "Слабый алгоритм подписи"
+    finding: >-
+      Актуальный сертификат на {names} подписан алгоритмом {sig_alg}.
+    recommendation: >-
+      Перевыпустить у УЦ, использующего SHA-256 или сильнее.
+
+  - id: wildcard_broad
+    applies_to: line
+    severity: medium
+    condition:
+      all:
+        - is_wildcard: true
+        - covered_names_gte: 10
+    title: "Wildcard-сертификат с широким охватом"
+    finding: >-
+      Сертификат {name} покрывает не менее {count} известных нам имён.
+      Один приватный ключ обслуживает все ресурсы, попадающие под маску.
+    recommendation: >-
+      Оценить, на скольких узлах размещён приватный ключ этого сертификата.
+      Компрометация любого из них означает компрометацию всех имён под
+      маской. Рассмотреть переход на отдельные сертификаты для критичных
+      ресурсов и хранение ключа в защищённом носителе.
+    note_for_meeting: >-
+      Прямой мостик к разговору о хранении ключей.
+
+  - id: shared_key_unrelated_names
+    applies_to: key
+    severity: high
+    requires_field: pubkey_sha256
+    condition:
+      all:
+        - distinct_registrable_domains_gte: 2
+    title: "Один публичный ключ на несвязанных именах"
+    finding: >-
+      Один и тот же публичный ключ обнаружен в сертификатах на {names}.
+      Это разные ресурсы, использующие общий приватный ключ.
+    recommendation: >-
+      Разделить ключи. Общий приватный ключ означает, что компрометация
+      одного ресурса распространяется на остальные, а плановая замена
+      требует одновременной работы на всех.
+
+  - id: name_not_resolving
+    applies_to: name
+    severity: low
+    condition:
+      all:
+        - resolves: false
+        - has_certificate: true
+    title: "Имя не резолвится, сертификаты выпускаются"
+    finding: >-
+      Имя {name} не резолвится в публичном DNS, при этом сертификаты на
+      него выпускались и попали в публичный лог.
+    recommendation: >-
+      Определить, действующий это ресурс без DNS-записи, остаток
+      закрытого проекта или служебное имя. Во всех трёх случаях выпуск
+      стоит прекратить или поставить на учёт.
+
+  - id: nonprod_name_exposed
+    applies_to: name
+    severity: medium
+    condition:
+      name_matches_any:
+        - '^(test|tests|testing)[.\-]'
+        - '^(dev|develop|development)[.\-]'
+        - '^(stage|staging|preprod|uat|qa)[.\-]'
+        - '^(demo|sandbox|tmp|temp|old|new|backup|bak)[.\-]'
+        - '^(jenkins|gitlab|jira|confluence|grafana|kibana|vpn|rdp|admin|adm)[.\-.]'
+        - '[.\-](test|dev|stage|staging|uat|qa|demo|internal|intranet|local)\.'
+    title: "Имя служебной или тестовой среды в публичном логе"
+    finding: >-
+      Имя {name} по структуре относится к тестовой, отладочной или
+      служебной среде. Сертификат на него выпущен публично доверенным УЦ,
+      и запись об этом попала в публичный лог Certificate Transparency.
+    recommendation: >-
+      Проверить, должен ли этот ресурс иметь публично доверенный
+      сертификат. Для внутренних сред обычно достаточно внутреннего УЦ,
+      выпуски которого в публичные логи не попадают.
+    note_for_meeting: >-
+      Убедительно, потому что компания не планировала публиковать эти
+      имена. Запись в CT появляется автоматически и не удаляется.
+
+  - id: issuance_unattributed
+    applies_to: line
+    severity: medium
+    condition:
+      all:
+        - provider_attributed: false
+        - matches_known_process: false
+    title: "Источник выпуска не идентифицирован"
+    finding: >-
+      Сертификат на {names} выпущен через {issuer}. Выпуск не удалось
+      связать ни с инфраструктурным провайдером, обслуживающим этот
+      ресурс, ни с известным нам процессом выпуска в компании.
+    recommendation: >-
+      Установить, кто инициировал выпуск. Такие случаи обычно указывают
+      на выпуск вне единого процесса — отдельной командой, подрядчиком
+      или в рамках закрытого проекта.
+    note_for_meeting: >-
+      Находкой является именно неатрибутируемость выпуска, а НЕ
+      использование бесплатного или ACME-УЦ. Автоматический выпуск через
+      платформу — норма, и называть его теневым ИТ нельзя: на встрече это
+      сразу читается как непонимание инфраструктуры.
+
+# Наблюдения выводятся в сводку как факт и не считаются проблемами.
+observations:
+
+  - id: obs_provider_issuance
+    applies_to: line
+    title: "Выпуск через инфраструктурного провайдера"
+    text: >-
+      {count} линий сертификатов выпущено через платформы, обслуживающие
+      соответствующие ресурсы (CDN, хостинг, PaaS). Это штатный
+      автоматический выпуск.
+
+  - id: obs_active_ca_count
+    applies_to: domain
+    title: "Число задействованных УЦ"
+    text: >-
+      На домены компании имеют одновременно действующие сертификаты
+      {count} удостоверяющих центров: {issuers}.
+    note_for_meeting: >-
+      Наблюдение, не находка. У крупной компании мультивендорность часто
+      осознанна: разные контуры, резервный УЦ, УЦ провайдера.
+
+  - id: obs_renewal_rhythm
+    applies_to: domain
+    title: "Ритм продления"
+    text: >-
+      Медианный интервал между выпусками — {rhythm} дн. Показатель
+      отличает автоматизированное продление от ручного и используется в
+      расчёте трудозатрат.
+
+# Оценка трудозатрат. Коэффициенты подлежат замене на значения из
+# отраслевого источника — открытый вопрос этапа 0.
+effort_model:
+  internal_to_external_ratio:
+    value: null            # во сколько раз внутренних сертификатов больше
+    source: null           # ССЫЛКА ОБЯЗАТЕЛЬНА, иначе раздел не выводится
+  hours_per_manual_renewal:
+    value: null
+    source: null
+  render_without_source: false   # без источника раздел в отчёт не идёт
