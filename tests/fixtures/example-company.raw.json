@@ -1,0 +1,742 @@
+[
+ {
+  "id": 1,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2024-09-04T00:00:00+00:00",
+  "not_after": "2024-12-03T00:00:00+00:00",
+  "serial_number": "aa00"
+ },
+ {
+  "id": 2,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2024-09-04T00:00:00+00:00",
+  "not_after": "2024-12-03T00:00:00+00:00",
+  "serial_number": "aa00"
+ },
+ {
+  "id": 3,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2024-11-03T00:00:00+00:00",
+  "not_after": "2025-02-01T00:00:00+00:00",
+  "serial_number": "aa01"
+ },
+ {
+  "id": 4,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2024-11-03T00:00:00+00:00",
+  "not_after": "2025-02-01T00:00:00+00:00",
+  "serial_number": "aa01"
+ },
+ {
+  "id": 5,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-01-02T00:00:00+00:00",
+  "not_after": "2025-04-02T00:00:00+00:00",
+  "serial_number": "aa02"
+ },
+ {
+  "id": 6,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-01-02T00:00:00+00:00",
+  "not_after": "2025-04-02T00:00:00+00:00",
+  "serial_number": "aa02"
+ },
+ {
+  "id": 7,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-03-03T00:00:00+00:00",
+  "not_after": "2025-06-01T00:00:00+00:00",
+  "serial_number": "aa03"
+ },
+ {
+  "id": 8,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-03-03T00:00:00+00:00",
+  "not_after": "2025-06-01T00:00:00+00:00",
+  "serial_number": "aa03"
+ },
+ {
+  "id": 9,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-05-02T00:00:00+00:00",
+  "not_after": "2025-07-31T00:00:00+00:00",
+  "serial_number": "aa04"
+ },
+ {
+  "id": 10,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-05-02T00:00:00+00:00",
+  "not_after": "2025-07-31T00:00:00+00:00",
+  "serial_number": "aa04"
+ },
+ {
+  "id": 11,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-07-01T00:00:00+00:00",
+  "not_after": "2025-09-29T00:00:00+00:00",
+  "serial_number": "aa05"
+ },
+ {
+  "id": 12,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-07-01T00:00:00+00:00",
+  "not_after": "2025-09-29T00:00:00+00:00",
+  "serial_number": "aa05"
+ },
+ {
+  "id": 13,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-08-30T00:00:00+00:00",
+  "not_after": "2025-11-28T00:00:00+00:00",
+  "serial_number": "aa06"
+ },
+ {
+  "id": 14,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-08-30T00:00:00+00:00",
+  "not_after": "2025-11-28T00:00:00+00:00",
+  "serial_number": "aa06"
+ },
+ {
+  "id": 15,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-10-29T00:00:00+00:00",
+  "not_after": "2026-01-27T00:00:00+00:00",
+  "serial_number": "aa07"
+ },
+ {
+  "id": 16,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-10-29T00:00:00+00:00",
+  "not_after": "2026-01-27T00:00:00+00:00",
+  "serial_number": "aa07"
+ },
+ {
+  "id": 17,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-12-28T00:00:00+00:00",
+  "not_after": "2026-03-28T00:00:00+00:00",
+  "serial_number": "aa08"
+ },
+ {
+  "id": 18,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2025-12-28T00:00:00+00:00",
+  "not_after": "2026-03-28T00:00:00+00:00",
+  "serial_number": "aa08"
+ },
+ {
+  "id": 19,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-02-26T00:00:00+00:00",
+  "not_after": "2026-05-27T00:00:00+00:00",
+  "serial_number": "aa09"
+ },
+ {
+  "id": 20,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-02-26T00:00:00+00:00",
+  "not_after": "2026-05-27T00:00:00+00:00",
+  "serial_number": "aa09"
+ },
+ {
+  "id": 21,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-04-27T00:00:00+00:00",
+  "not_after": "2026-07-26T00:00:00+00:00",
+  "serial_number": "aa0a"
+ },
+ {
+  "id": 22,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-04-27T00:00:00+00:00",
+  "not_after": "2026-07-26T00:00:00+00:00",
+  "serial_number": "aa0a"
+ },
+ {
+  "id": 23,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-06-26T00:00:00+00:00",
+  "not_after": "2026-09-24T00:00:00+00:00",
+  "serial_number": "aa0b"
+ },
+ {
+  "id": 24,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "www.example.com",
+  "name_value": "www.example.com\nexample.com",
+  "not_before": "2026-06-26T00:00:00+00:00",
+  "not_after": "2026-09-24T00:00:00+00:00",
+  "serial_number": "aa0b"
+ },
+ {
+  "id": 25,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2024-10-12T00:00:00+00:00",
+  "not_after": "2025-01-10T00:00:00+00:00",
+  "serial_number": "bb00"
+ },
+ {
+  "id": 26,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2024-10-12T00:00:00+00:00",
+  "not_after": "2025-01-10T00:00:00+00:00",
+  "serial_number": "bb00"
+ },
+ {
+  "id": 27,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2024-12-13T00:00:00+00:00",
+  "not_after": "2025-03-13T00:00:00+00:00",
+  "serial_number": "bb01"
+ },
+ {
+  "id": 28,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2024-12-13T00:00:00+00:00",
+  "not_after": "2025-03-13T00:00:00+00:00",
+  "serial_number": "bb01"
+ },
+ {
+  "id": 29,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-02-13T00:00:00+00:00",
+  "not_after": "2025-05-14T00:00:00+00:00",
+  "serial_number": "bb02"
+ },
+ {
+  "id": 30,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-02-13T00:00:00+00:00",
+  "not_after": "2025-05-14T00:00:00+00:00",
+  "serial_number": "bb02"
+ },
+ {
+  "id": 31,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-04-16T00:00:00+00:00",
+  "not_after": "2025-07-15T00:00:00+00:00",
+  "serial_number": "bb03"
+ },
+ {
+  "id": 32,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-04-16T00:00:00+00:00",
+  "not_after": "2025-07-15T00:00:00+00:00",
+  "serial_number": "bb03"
+ },
+ {
+  "id": 33,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-06-17T00:00:00+00:00",
+  "not_after": "2025-09-15T00:00:00+00:00",
+  "serial_number": "bb04"
+ },
+ {
+  "id": 34,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-06-17T00:00:00+00:00",
+  "not_after": "2025-09-15T00:00:00+00:00",
+  "serial_number": "bb04"
+ },
+ {
+  "id": 35,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-08-18T00:00:00+00:00",
+  "not_after": "2025-11-16T00:00:00+00:00",
+  "serial_number": "bb05"
+ },
+ {
+  "id": 36,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-08-18T00:00:00+00:00",
+  "not_after": "2025-11-16T00:00:00+00:00",
+  "serial_number": "bb05"
+ },
+ {
+  "id": 37,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-10-19T00:00:00+00:00",
+  "not_after": "2026-01-17T00:00:00+00:00",
+  "serial_number": "bb06"
+ },
+ {
+  "id": 38,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-10-19T00:00:00+00:00",
+  "not_after": "2026-01-17T00:00:00+00:00",
+  "serial_number": "bb06"
+ },
+ {
+  "id": 39,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-12-20T00:00:00+00:00",
+  "not_after": "2026-03-20T00:00:00+00:00",
+  "serial_number": "bb07"
+ },
+ {
+  "id": 40,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2025-12-20T00:00:00+00:00",
+  "not_after": "2026-03-20T00:00:00+00:00",
+  "serial_number": "bb07"
+ },
+ {
+  "id": 41,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-02-20T00:00:00+00:00",
+  "not_after": "2026-05-21T00:00:00+00:00",
+  "serial_number": "bb08"
+ },
+ {
+  "id": 42,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-02-20T00:00:00+00:00",
+  "not_after": "2026-05-21T00:00:00+00:00",
+  "serial_number": "bb08"
+ },
+ {
+  "id": 43,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-04-23T00:00:00+00:00",
+  "not_after": "2026-07-22T00:00:00+00:00",
+  "serial_number": "bb09"
+ },
+ {
+  "id": 44,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-04-23T00:00:00+00:00",
+  "not_after": "2026-07-22T00:00:00+00:00",
+  "serial_number": "bb09"
+ },
+ {
+  "id": 45,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-06-24T00:00:00+00:00",
+  "not_after": "2026-09-22T00:00:00+00:00",
+  "serial_number": "bb0a"
+ },
+ {
+  "id": 46,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "shop.example.com",
+  "name_value": "shop.example.com",
+  "not_before": "2026-06-24T00:00:00+00:00",
+  "not_after": "2026-09-22T00:00:00+00:00",
+  "serial_number": "bb0a"
+ },
+ {
+  "id": 47,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "legacy.example.com",
+  "name_value": "legacy.example.com",
+  "not_before": "2025-03-23T00:00:00+00:00",
+  "not_after": "2026-03-23T00:00:00+00:00",
+  "serial_number": "c001"
+ },
+ {
+  "id": 48,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "legacy.example.com",
+  "name_value": "legacy.example.com",
+  "not_before": "2025-03-23T00:00:00+00:00",
+  "not_after": "2026-03-23T00:00:00+00:00",
+  "serial_number": "c001"
+ },
+ {
+  "id": 49,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "mail.example.com",
+  "name_value": "mail.example.com",
+  "not_before": "2025-07-21T00:00:00+00:00",
+  "not_after": "2026-07-21T00:00:00+00:00",
+  "serial_number": "c002"
+ },
+ {
+  "id": 50,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "mail.example.com",
+  "name_value": "mail.example.com",
+  "not_before": "2025-07-21T00:00:00+00:00",
+  "not_after": "2026-07-21T00:00:00+00:00",
+  "serial_number": "c002"
+ },
+ {
+  "id": 51,
+  "issuer_ca_id": 303,
+  "issuer_name": "C=US, O=Other CA, CN=Other CA R3",
+  "common_name": "api.example.com",
+  "name_value": "api.example.com",
+  "not_before": "2026-06-01T00:00:00+00:00",
+  "not_after": "2026-08-30T00:00:00+00:00",
+  "serial_number": "d001"
+ },
+ {
+  "id": 52,
+  "issuer_ca_id": 303,
+  "issuer_name": "C=US, O=Other CA, CN=Other CA R3",
+  "common_name": "api.example.com",
+  "name_value": "api.example.com",
+  "not_before": "2026-06-01T00:00:00+00:00",
+  "not_after": "2026-08-30T00:00:00+00:00",
+  "serial_number": "d001"
+ },
+ {
+  "id": 53,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "lk.example.com",
+  "name_value": "lk.example.com",
+  "not_before": "2025-09-15T00:00:00+00:00",
+  "not_after": "2026-09-15T00:00:00+00:00",
+  "serial_number": "d002"
+ },
+ {
+  "id": 54,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "lk.example.com",
+  "name_value": "lk.example.com",
+  "not_before": "2025-09-15T00:00:00+00:00",
+  "not_after": "2026-09-15T00:00:00+00:00",
+  "serial_number": "d002"
+ },
+ {
+  "id": 55,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "*.example.com",
+  "name_value": "*.example.com\nn0.example.com\nn1.example.com\nn2.example.com\nn3.example.com\nn4.example.com\nn5.example.com\nn6.example.com\nn7.example.com\nn8.example.com\nn9.example.com\nn10.example.com\nn11.example.com\nn12.example.com\nn13.example.com",
+  "not_before": "2026-07-26T00:00:00+00:00",
+  "not_after": "2027-07-26T00:00:00+00:00",
+  "serial_number": "e001"
+ },
+ {
+  "id": 56,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "*.example.com",
+  "name_value": "*.example.com\nn0.example.com\nn1.example.com\nn2.example.com\nn3.example.com\nn4.example.com\nn5.example.com\nn6.example.com\nn7.example.com\nn8.example.com\nn9.example.com\nn10.example.com\nn11.example.com\nn12.example.com\nn13.example.com",
+  "not_before": "2026-07-26T00:00:00+00:00",
+  "not_after": "2027-07-26T00:00:00+00:00",
+  "serial_number": "e001"
+ },
+ {
+  "id": 57,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "test.example.com",
+  "name_value": "test.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "ftes"
+ },
+ {
+  "id": 58,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "test.example.com",
+  "name_value": "test.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "ftes"
+ },
+ {
+  "id": 59,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "dev.example.com",
+  "name_value": "dev.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fdev"
+ },
+ {
+  "id": 60,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "dev.example.com",
+  "name_value": "dev.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fdev"
+ },
+ {
+  "id": 61,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "staging.example.com",
+  "name_value": "staging.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fsta"
+ },
+ {
+  "id": 62,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "staging.example.com",
+  "name_value": "staging.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fsta"
+ },
+ {
+  "id": 63,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "jenkins.example.com",
+  "name_value": "jenkins.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fjen"
+ },
+ {
+  "id": 64,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "jenkins.example.com",
+  "name_value": "jenkins.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fjen"
+ },
+ {
+  "id": 65,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "grafana.example.com",
+  "name_value": "grafana.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fgra"
+ },
+ {
+  "id": 66,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "grafana.example.com",
+  "name_value": "grafana.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fgra"
+ },
+ {
+  "id": 67,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "vpn.example.com",
+  "name_value": "vpn.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fvpn"
+ },
+ {
+  "id": 68,
+  "issuer_ca_id": 101,
+  "issuer_name": "C=US, O=Free ACME CA, CN=Free ACME CA R3",
+  "common_name": "vpn.example.com",
+  "name_value": "vpn.example.com",
+  "not_before": "2026-07-11T00:00:00+00:00",
+  "not_after": "2026-10-09T00:00:00+00:00",
+  "serial_number": "fvpn"
+ },
+ {
+  "id": 69,
+  "issuer_ca_id": 404,
+  "issuer_name": "C=US, O=Cloudflare Inc, CN=Cloudflare Inc R3",
+  "common_name": "cdn.example.com",
+  "name_value": "cdn.example.com",
+  "not_before": "2026-08-05T00:00:00+00:00",
+  "not_after": "2026-11-03T00:00:00+00:00",
+  "serial_number": "0a01"
+ },
+ {
+  "id": 70,
+  "issuer_ca_id": 404,
+  "issuer_name": "C=US, O=Cloudflare Inc, CN=Cloudflare Inc R3",
+  "common_name": "cdn.example.com",
+  "name_value": "cdn.example.com",
+  "not_before": "2026-08-05T00:00:00+00:00",
+  "not_after": "2026-11-03T00:00:00+00:00",
+  "serial_number": "0a01"
+ },
+ {
+  "id": 71,
+  "issuer_ca_id": 505,
+  "issuer_name": "C=US, O=Beget Hosting CA, CN=Beget Hosting CA R3",
+  "common_name": "example.com",
+  "name_value": "example.com\nclient0.othersite0.ru\nclient1.othersite1.ru\nclient2.othersite2.ru\nclient3.othersite3.ru\nclient4.othersite4.ru\nclient5.othersite5.ru\nclient6.othersite6.ru\nclient7.othersite7.ru",
+  "not_before": "2026-08-10T00:00:00+00:00",
+  "not_after": "2026-11-08T00:00:00+00:00",
+  "serial_number": "0b01"
+ },
+ {
+  "id": 72,
+  "issuer_ca_id": 505,
+  "issuer_name": "C=US, O=Beget Hosting CA, CN=Beget Hosting CA R3",
+  "common_name": "example.com",
+  "name_value": "example.com\nclient0.othersite0.ru\nclient1.othersite1.ru\nclient2.othersite2.ru\nclient3.othersite3.ru\nclient4.othersite4.ru\nclient5.othersite5.ru\nclient6.othersite6.ru\nclient7.othersite7.ru",
+  "not_before": "2026-08-10T00:00:00+00:00",
+  "not_after": "2026-11-08T00:00:00+00:00",
+  "serial_number": "0b01"
+ },
+ {
+  "id": 73,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "partner.somepartner.ru",
+  "name_value": "partner.somepartner.ru",
+  "not_before": "2026-06-26T00:00:00+00:00",
+  "not_after": "2027-06-26T00:00:00+00:00",
+  "serial_number": "0c01"
+ },
+ {
+  "id": 74,
+  "issuer_ca_id": 202,
+  "issuer_name": "C=US, O=Commercial CA, CN=Commercial CA R3",
+  "common_name": "partner.somepartner.ru",
+  "name_value": "partner.somepartner.ru",
+  "not_before": "2026-06-26T00:00:00+00:00",
+  "not_after": "2027-06-26T00:00:00+00:00",
+  "serial_number": "0c01"
+ }
+]
