@@ -60,6 +60,14 @@ def run(check):
     check("раздел трудозатрат без источника не выводится",
           "Раздел не выводится" in html or "не подкреплены источником" in html, True)
 
-    for want in ("example.com.html", "example.com.json", "example.com.pdf",
+    for want in ("example.com.html", "example.com.json",
                  "example.com.certificates.csv", "example.com.findings.csv"):
         check(f"создан {want}", want in files, True)
+
+    # Печать в PDF по дизайну деградирует мягко: без браузера HTML всё равно
+    # готов и печатается вручную. Проверяем PDF только там, где есть чем печатать.
+    from shadow_pki.report import find_chrome
+    if find_chrome():
+        check("создан example.com.pdf", "example.com.pdf" in files, True)
+    else:
+        check("без браузера HTML всё равно готов", "example.com.html" in files, True)
