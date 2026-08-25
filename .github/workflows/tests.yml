@@ -1,0 +1,43 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Установка зависимостей
+        run: pip install -r requirements.txt
+
+      - name: Проверки
+        # Среди них test_no_host_contact — архитектурная гарантия продукта:
+        # перехватываются исходящие соединения и проверяется, что сервис
+        # не обращается к хостам компании, по которой строится отчёт.
+        # Требование не должно держаться на договорённости.
+        run: python3 tests/run.py
+
+      - name: Конфиги правил читаются
+        run: |
+          python3 -c "
+          import yaml
+          r = yaml.safe_load(open('config/rules.yaml'))
+          o = yaml.safe_load(open('config/ownership.yaml'))
+          assert r['findings'] and r['observations']
+          ids = [f['id'] for f in r['findings']]
+          assert len(ids) == len(set(ids)), 'дублирующиеся id правил'
+          need = {'id','applies_to','severity','condition','title','finding','recommendation'}
+          for f in r['findings']:
+              assert need <= set(f), f['id']
+              assert f['severity'] in r['severity_levels'], f['id']
+          assert o['default_level'] == 'unknown'
+          print(f'правил: {len(ids)}, наблюдений: {len(r[\"observations\"])}')
+          "

@@ -6,7 +6,7 @@ import traceback
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-MODULES = ["test_lines", "test_no_host_contact", "test_pipeline"]
+MODULES = ["test_lines", "test_no_host_contact", "test_pipeline", "test_web"]
 
 
 def main():
