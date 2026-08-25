@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 import yaml
 
 from . import pipeline
+from .model import normalize_root
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEF_RULES = os.path.join(HERE, "config", "rules.yaml")
@@ -122,6 +123,9 @@ def main(argv=None):
 
     failed = []
     for d in args.domains:
+        d, stripped = normalize_root(d)
+        if stripped:
+            log(f"[{d}] введён домен с префиксом www, отчёт строится по корневому")
         try:
             process(d, args, rules_cfg, own_cfg, now)
         except Exception as ex:

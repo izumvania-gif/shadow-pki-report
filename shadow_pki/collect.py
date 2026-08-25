@@ -53,21 +53,26 @@ def strip_subject(dn):
     return ", ".join(kept)
 
 
-def _get(url, headers=None, tries=4):
-    delay = 2
+def _get(url, headers=None, tries=6):
+    # crt.sh регулярно отдаёт 502; коротких ретраев не хватает
+    delay = 3
     for attempt in range(1, tries + 1):
         req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
         try:
             with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
                 return json.loads(r.read().decode("utf-8", "replace"))
         except urllib.error.HTTPError as e:
-            if e.code not in (429, 500, 502, 503, 504) or attempt == tries:
+            if e.code not in (429, 500, 502, 503, 504):
                 raise
+            if attempt == tries:
+                raise RuntimeError(
+                    f"источник не ответил после {tries} попыток (HTTP {e.code}). "
+                    "Повторите позже или переключитесь на --source certspotter") from e
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
             if attempt == tries:
                 raise
         time.sleep(delay)
-        delay *= 2
+        delay = min(delay * 2, 30)
 
 
 def fetch_raw(domain, source="crtsh", token=""):
@@ -177,6 +182,16 @@ def resolve_names(names, workers=16):
             info.resolves = bool(info.addresses)
         except (socket.gaierror, UnicodeError, OSError):
             info.resolves = False
+        try:
+            # Цепочка алиасов = CNAME. На ней стоит вся атрибуция CDN и SaaS
+            # в разметке принадлежности, поэтому поле обязательно.
+            canonical, aliases, _ = socket.gethostbyname_ex(target)
+            chain = [canonical] + list(aliases or [])
+            chain = [c.lower().rstrip(".") for c in chain
+                     if c and c.lower().rstrip(".") != target]
+            info.cname = chain[0] if chain else None
+        except (socket.gaierror, UnicodeError, OSError):
+            pass
         return info
 
     with ThreadPoolExecutor(max_workers=workers) as pool:

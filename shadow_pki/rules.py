@@ -48,7 +48,25 @@ def _fmt(template, ctx):
     return " ".join((template or "").format_map(Safe(ctx)).split())
 
 
-def line_ctx(line, names_info, now, known_processes):
+def live_coverage(lines, now):
+    """
+    Имя -> покрыто ли оно действующим сертификатом хоть в одной линии.
+
+    Линии группируются по набору SAN, поэтому имя, у которого состав SAN
+    со временем менялся, попадает сразу в несколько линий. Старая линия
+    выглядит истёкшей, хотя имя покрыто более новым сертификатом из
+    соседней линии. Без этой поправки правила про истечение дают
+    массовые ложные срабатывания — вплоть до «*.example.com истёк» у
+    компании с исправным продлением.
+    """
+    live = set()
+    for l in lines:
+        if l.current and not l.current_expired(now):
+            live.update(l.names)
+    return live
+
+
+def line_ctx(line, names_info, now, known_processes, live_names=frozenset()):
     cur = line.current
     resolving = [n for n in line.names
                  if names_info.get(n) and names_info[n].resolves]
@@ -61,6 +79,7 @@ def line_ctx(line, names_info, now, known_processes):
         "issuer": (cur.issuer if cur else "") or "неизвестный УЦ",
         "issuers": ", ".join(line.issuers_ever),
         "current_expired": line.current_expired(now),
+        "covered_by_newer": any(n in live_names for n in line.names),
         "any_name_resolves": bool(resolving),
         "days_to_expiry": line.days_to_expiry(now),
         "days": line.days_to_expiry(now),
@@ -130,6 +149,8 @@ def run(cfg, lines, names_info, now, known_processes=None):
         known_processes = ((cfg.get("corporate_standard") or {})
                            .get("known_ca_patterns") or [])
 
+    live_names = live_coverage(scored, now)
+
     by_key = defaultdict(list)
     for l in scored:
         if l.current and l.current.pubkey_sha256:
@@ -152,7 +173,8 @@ def run(cfg, lines, names_info, now, known_processes=None):
 
         target = rule.get("applies_to")
         if target == "line":
-            items = [(l, line_ctx(l, names_info, now, known_processes)) for l in scored]
+            items = [(l, line_ctx(l, names_info, now, known_processes, live_names))
+                     for l in scored]
         elif target == "name":
             items = [(i, name_ctx(i, True)) for i in named.values() if i]
         elif target == "key":

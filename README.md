@@ -49,7 +49,7 @@ python3 -m shadow_pki rutoken.ru --out out/
 python3 -m shadow_pki example.com --fixture tests/fixtures/example-company.raw.json
 ```
 
-Проверки: `python3 tests/run.py` — 48 проверок, зависимостей кроме PyYAML нет. Гоняются в CI на каждый push.
+Проверки: `python3 tests/run.py` — 61 проверка, зависимостей кроме PyYAML нет. Гоняются в CI на каждый push.
 
 PDF печатается headless-браузером. Если он не найден — задайте `CHROME_PATH`; HTML при этом всё равно готов и печатается вручную.
 
@@ -61,6 +61,7 @@ PDF печатается headless-браузером. Если он не най�
 | Требования и план разработки | [`docs/requirements-and-plan.md`](docs/requirements-and-plan.md) | Редакция 2 |
 | Оценка идеи и плана | [`docs/assessment.md`](docs/assessment.md) | Готово, со [статусом рекомендаций](docs/assessment.md#6-статус-рекомендаций) |
 | Чек-лист этапа 0 | [`docs/stage-0.md`](docs/stage-0.md) | В работе |
+| Разбор первого прогона | [`docs/first-run.md`](docs/first-run.md) | 10 запусков, 4 дефекта, все исправлены |
 | Правила и разметка | [`config/`](config/) | Черновики этапа 0 |
 | Пайплайн и веб-интерфейс | [`shadow_pki/`](shadow_pki/) | Работают end-to-end, прогон по реальным доменам не сделан |
 | Реализация продукта | — | Не начата |

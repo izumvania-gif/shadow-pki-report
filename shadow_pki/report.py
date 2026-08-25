@@ -156,6 +156,12 @@ def render_html(ctx):
         f"<td class='mono'>{e(l['renewal_rhythm_days'] or '—')}</td></tr>"
         for l in ctx["lines"])
 
+    warns = ""
+    if ctx.get("warnings"):
+        warns = ("<div class='note'><b>Замечания к полноте выборки</b><ul>"
+                 + "".join(f"<li>{e(w)}</li>" for w in ctx["warnings"])
+                 + "</ul></div>")
+
     skipped = ""
     if ctx["skipped_rules"]:
         skipped = ("<div class='note'><b>Правила, которые не применялись</b>"
@@ -213,6 +219,7 @@ Transparency и публичным DNS-записям. К инфраструкт
 в логе на одно имя; в отчёте они сведены в одну линию.
 Обработано записей реестра: {s['raw_ct_records']}, из них схлопнуто
 предсертификатов: {s['collapsed_precerts']}.</p>
+{warns}
 {skipped}
 </div>
 

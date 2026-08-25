@@ -37,6 +37,7 @@ findings:
     condition:
       all:
         - current_expired: true
+        - covered_by_newer: false      # имя не покрыто действующим сертификатом
         - any_name_resolves: true
     title: "Имя резолвится, актуальный сертификат истёк"
     finding: >-
@@ -56,6 +57,7 @@ findings:
     condition:
       all:
         - current_expired: true
+        - covered_by_newer: false
         - any_name_resolves: false
     title: "Сертификат истёк и не был перевыпущен"
     finding: >-

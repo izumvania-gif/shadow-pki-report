@@ -26,6 +26,7 @@ from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from . import pipeline
+from .model import normalize_root
 from .report import lines_n, plural
 
 DOMAIN_RE = re.compile(r"^[a-z0-9-]+(\.[a-z0-9-]+)+$", re.I)
@@ -40,6 +41,8 @@ def e(x):
 
 
 class Job:
+    notice = None
+
     def __init__(self, jid, domain, opts):
         self.id = jid
         self.domain = domain
@@ -239,6 +242,8 @@ def job_page(job):
         return page(f"Ошибка — {job.domain}", body)
 
     logs = "".join(f"<div>{e(m)}</div>" for m in (job.run.log if job.run else []))
+    notes = notices(job)
+
 
     if job.status == "done":
         files = ""
@@ -252,6 +257,7 @@ def job_page(job):
         body = (f'<h1 class="mono">{e(job.domain)}</h1>'
                 f'<div class="sub">{pill(job.status)} · найдено {lines_n(s["certificate_lines"])} '
                 f'сертификатов, {plural(s["findings_total"], "находка", "находки", "находок")}</div>'
+                f'{notes}'
                 f'<div class="card"><table>{files}</table></div>'
                 f'<div class="card"><b>Ход выполнения</b><div class="log">{logs}</div></div>'
                 f'<p><a href="/">← новый запуск</a></p>')
@@ -269,7 +275,17 @@ def job_page(job):
         "<head><meta charset=\"utf-8\"><meta http-equiv=\"refresh\" content=\"3\">")
 
 
+def notices(job):
+    out = ""
+    if job.notice:
+        out += f'<div class="warn">{e(job.notice)}</div>'
+    for w in (job.run.warnings if job.run else []):
+        out += f'<div class="warn">{e(w)}</div>'
+    return out
+
+
 def review_page(job):
+    notes = notices(job)
     unknown = job.run.unknown_lines()
     items = ""
     for i, l in enumerate(unknown):
@@ -286,6 +302,7 @@ def review_page(job):
 
     body = f"""<h1 class="mono">{e(job.domain)}</h1>
 <div class="sub">{pill(job.status)} · {plural(len(unknown), 'запись', 'записи', 'записей')} не удалось разметить автоматически</div>
+{notes}
 <div class="warn">Отметьте, что принадлежит компании. Пропущенные записи в отчёт не попадут.
 Решения сохраняются и используются для автоматизации фильтра.</div>
 <form method="post" action="/job/{e(job.id)}/review">
@@ -363,7 +380,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/run":
             f = self._form()
-            domain = (f.get("domain", [""])[0] or "").strip().lower().rstrip(".")
+            domain, stripped = normalize_root(f.get("domain", [""])[0])
             if not DOMAIN_RE.match(domain):
                 return self._send(index_page("Домен указан неверно. Пример: example.ru"), 400)
             also = [d.strip().lower() for d in (f.get("also", [""])[0] or "").split()
@@ -383,6 +400,9 @@ class Handler(BaseHTTPRequestHandler):
                                     no_pdf=getattr(args, "no_pdf", False),
                                     fixture=getattr(args, "fixture", None))
             job = Job(jid, domain, opts)
+            if stripped:
+                job.notice = ("Введён домен с префиксом www — отчёт построен "
+                              f"по корневому домену {domain}.")
             with JOBS_LOCK:
                 JOBS[jid] = job
             save_index()

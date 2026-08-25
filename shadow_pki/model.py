@@ -26,6 +26,21 @@ def registrable(name: str) -> str:
     return ".".join(parts[-2:])
 
 
+def normalize_root(domain):
+    """
+    Приводит введённый домен к корневому.
+
+    Ввод `www.sdm.ru` вместо `sdm.ru` даёт запрос по поддоменам www и
+    выгрузку из единиц записей вместо сотен. В реальном прогоне это
+    выглядело как «у компании почти нет сертификатов», а не как ошибка
+    ввода, поэтому префикс снимается молча, а факт замены возвращается.
+    """
+    d = (domain or "").strip().lower().rstrip(".")
+    if d.startswith("www."):
+        return d[4:], True
+    return d, False
+
+
 def norm_names(raw):
     out = set()
     for n in raw:

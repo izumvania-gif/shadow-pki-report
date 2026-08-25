@@ -53,6 +53,7 @@ class Run:
     status: str = "queued"
     error: str = None
     log: list = field(default_factory=list)
+    warnings: list = field(default_factory=list)
 
     certs: list = field(default_factory=list)
     collapsed: int = 0
@@ -66,6 +67,13 @@ class Run:
 
     def note(self, msg):
         self.log.append(msg)
+        return msg
+
+    def warn(self, msg):
+        """Предупреждение попадает и в лог, и в методологию отчёта."""
+        if msg not in self.warnings:
+            self.warnings.append(msg)
+        self.log.append("ВНИМАНИЕ: " + msg)
         return msg
 
     # --- фазы ---------------------------------------------------------
@@ -97,7 +105,27 @@ class Run:
         self.lines = collect.build_lines(self.certs)
         self.note(f"линий сертификатов: {len(self.lines)} "
                   f"(схлопнуто предсертификатов: {self.collapsed})")
+        self.check_plausibility()
         return self
+
+    def check_plausibility(self):
+        """
+        Неполный ответ источника выглядит как маленькая компания.
+
+        Молча принятая усечённая выгрузка опаснее ошибки: отчёт занижает
+        картину, и это не видно ни составителю, ни заказчику.
+        """
+        n = len(self.certs)
+        if n and not self.collapsed:
+            self.warn("предсертификаты в выборке не найдены — обычно каждый "
+                      "сертификат публикуется вместе с предсертификатом. "
+                      "Похоже на неполный ответ источника, стоит повторить прогон")
+        if 0 < n < 10:
+            self.warn(f"получено всего {n} записей реестра. Для домена компании "
+                      "это неправдоподобно мало: проверьте, что указан корневой "
+                      "домен, и повторите прогон")
+        if not n:
+            self.warn("источник не вернул ни одной записи по этому домену")
 
     def resolve_phase(self):
         self.status = "resolving"
@@ -187,6 +215,7 @@ class Run:
             "summary": self.summary(),
             "findings": [f.as_dict() for f in self.findings],
             "skipped_rules": self.skipped,
+            "warnings": list(self.warnings),
             "observations": self.observations,
             "lines": [l.as_dict(self.now) for l in scored],
             "names": [self.names_info[n].as_dict() for n in names if n in self.names_info],
